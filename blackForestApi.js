@@ -10,31 +10,27 @@ let aiHTML = document.getElementById("imageAI");
 
 
 
-
 async function fetchIngredientsList() {
   let userRecipe = recipeChoice.value;
-  let url = "https://api.openai.com/v1/chat/completions";
+  let url = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1/v1/chat/completions";
   let payload = {
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "user",
-        content: `List ingredients in ${userRecipe} by order of importance to the recipe`
-      }
-    ]
+    model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    messages: [{role: "user", content: `List individual ingredients in ${userRecipe} by order of importance to the recipe`}],
+    max_tokens: 500,
+    stream: false
   };
   console.log(payload);
   let result = await fetch(url, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
-      "Authorization": `Bearer ${oaiUserTokenJs}`,
+      "Authorization": `Bearer ${hfUserTokenJs}`,
       "Content-Type": "application/json"
     }  
   });
-  let data = await result.json();
+  let data = await result.blob();
 /*   console.log(data); */
-  let ingredients = data.choices[0].message.content;
+  let ingredients = data.choices[0].messages.content;
  /*  console.log(ingredients); */
   recipeHTML.innerHTML = ingredients;
   return ingredients;

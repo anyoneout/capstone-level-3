@@ -1,0 +1,13 @@
+body {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  border: solid, 1px, black;
+}
+
+.col {
+  border: solid, 1px, black;
+}
+
+form {
+  data-bs-theme: dark;
+}

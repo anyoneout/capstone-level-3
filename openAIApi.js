@@ -1,7 +1,38 @@
 let recipeChoice = document.getElementById("chosenRecipe");
 let oaiJsUserToken = localStorage.getItem("oaiToken");
 let recipeHTML = document.getElementById("recipeIngredients");
-let aiHTML = document.getElementById("imageAI");
+let ingredientsImgHTML = document.getElementById("ingredientsAI");
+let recipeImgHTML = document.getElementById("recipeAI");
+
+
+
+async function fetchRecipeImage() {
+  let userRecipe = recipeChoice.value;
+  let url = "https://api.openai.com/v1/images/generations";
+  let payload = {
+    model: "dall-e-3",
+    prompt: `  Show the following recipe against a white background ${userRecipe}.  Omit any numbers, letters or words in the finished image.`,
+    n: 1,
+    size: "1024x1024"
+  };
+  let result = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      "Authorization": `Bearer ${oaiJsUserToken}`,
+      "Content-Type": "application/json"
+    }  
+  });
+  console.log(payload);
+  let data = await result.json();
+  console.log(payload);
+  recipeImgHTML.src = data.data[0].url;
+  console.log(data); 
+};
+
+
+
+
 
 
 async function fetchIngredientsList() {
@@ -54,11 +85,12 @@ async function fetchIngredientsList() {
   console.log(payload);
   let data = await result.json();
   console.log(payload);
-  aiHTML.src = data.data[0].url;
+  ingredientsImgHTML.src = data.data[0].url;
   console.log(data); 
 };
 
 async function fetchListImage() {
+  fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
