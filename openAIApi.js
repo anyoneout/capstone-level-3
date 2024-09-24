@@ -1,5 +1,5 @@
 let recipeChoice = document.getElementById("chosenRecipe");
-let userTokenLs = localStorage.getItem("userToken");
+let oaiJsUserToken = localStorage.getItem("oaiToken");
 let recipeHTML = document.getElementById("recipeIngredients");
 let aiHTML = document.getElementById("imageAI");
 
@@ -12,7 +12,7 @@ async function fetchIngredientsList() {
     messages: [
       {
         role: "user",
-        content: `List ingredients in ${userRecipe} by order of importance to the recipe`
+        content: `List individual ingredients in ${userRecipe} by order of importance to the recipe`
       }
     ]
   };
@@ -21,51 +21,48 @@ async function fetchIngredientsList() {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
-      "Authorization": `Bearer ${userTokenLs}`,
+      "Authorization": `Bearer ${oaiJsUserToken}`,
       "Content-Type": "application/json"
     }  
   });
   let data = await result.json();
 /*   console.log(data); */
-  let anything = data.choices[0].message.content;
+  let ingredients = data.choices[0].message.content;
  /*  console.log(ingredients); */
-  recipeHTML.innerHTML = anything;
-  return anything;
+  recipeHTML.innerHTML = ingredients;
+  return ingredients;
 };
 
 
   async function fetchIngredientsImage(ingredients) {
-    let userRecipe = recipeChoice.value;
-  let url2 = "https://api.openai.com/v1/images/generations";
-  let payload2 = {
+
+  let url = "https://api.openai.com/v1/images/generations";
+  let payload = {
     model: "dall-e-3",
-    prompt: `  show each item once ${ingredients} against a white background.  omit any numbers, letters or words or multiple instances of the same item in the finished image.`,
+    prompt: `  place each of the following items only once against a white background. limit the number of items to the length of the list of ingredients: ${ingredients}.  Omit any numbers, letters or words in the finished image.`,
     n: 1,
     size: "1024x1024"
   };
-  let result2 = await fetch(url2, {
+  let result = await fetch(url, {
     method: "POST",
-    body: JSON.stringify(payload2),
+    body: JSON.stringify(payload),
     headers: {
-      "Authorization": `Bearer ${userTokenLs}`,
+      "Authorization": `Bearer ${oaiJsUserToken}`,
       "Content-Type": "application/json"
     }  
   });
-  console.log(payload2);
-  let data2 = await result2.json();
-  console.log(payload2);
-  aiHTML.src = data2.data[0].url;
-  console.log(data2); 
+  console.log(payload);
+  let data = await result.json();
+  console.log(payload);
+  aiHTML.src = data.data[0].url;
+  console.log(data); 
 };
 
 async function fetchListImage() {
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
-
   fetchIngredientsImage(ingredients);
 }
 
-/* saveButton.addEventListener("click", fetchIngredientsList);
-saveButton.addEventListener("click", fetchIngredientsImage);
- */
+
 fetchButton.addEventListener("click", fetchListImage);
