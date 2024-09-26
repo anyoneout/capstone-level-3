@@ -1,5 +1,5 @@
 
-let oaiJsUserToken = localStorage.getItem("hfTokenInput");
+let oaiJsUserToken = localStorage.getItem("oaiToken");
 let recipeChoice = document.getElementById("chosenRecipe");
 let recipeHTML = document.getElementById("recipeIngredients");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
