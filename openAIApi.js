@@ -1,17 +1,18 @@
-let recipeChoice = document.getElementById("chosenRecipe");
+
 let oaiJsUserToken = localStorage.getItem("oaiToken");
+let recipeChoice = document.getElementById("chosenRecipe");
 let recipeHTML = document.getElementById("recipeIngredients");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
 let recipeImgHTML = document.getElementById("recipeAI");
-
-
+let firstArrow = document.getElementById("firstArrowHTML");
+let secondArrow = document.getElementById("secondArrowHTML");
 
 async function fetchRecipeImage() {
   let userRecipe = recipeChoice.value;
   let url = "https://api.openai.com/v1/images/generations";
   let payload = {
     model: "dall-e-3",
-    prompt: `  Show the following recipe against a white background ${userRecipe}.  Omit any numbers, letters or words in the finished image.`,
+    prompt: `  Create a photo realistic image of the following recipe against a black background: ${userRecipe}.  Omit any numbers, letters or words in the finished image.`,
     n: 1,
     size: "1024x1024"
   };
@@ -25,14 +26,12 @@ async function fetchRecipeImage() {
   });
   console.log(payload);
   let data = await result.json();
+  firstArrow.style.visibility = "visible";
   console.log(payload);
   recipeImgHTML.src = data.data[0].url;
+  recipeImgHTML.classList.add("borderImage");
   console.log(data); 
 };
-
-
-
-
 
 
 async function fetchIngredientsList() {
@@ -57,20 +56,17 @@ async function fetchIngredientsList() {
     }  
   });
   let data = await result.json();
-/*   console.log(data); */
   let ingredients = data.choices[0].message.content;
- /*  console.log(ingredients); */
-  recipeHTML.innerHTML = ingredients;
+  /* recipeHTML.innerHTML = ingredients; */
   return ingredients;
 };
 
 
   async function fetchIngredientsImage(ingredients) {
-
   let url = "https://api.openai.com/v1/images/generations";
   let payload = {
     model: "dall-e-3",
-    prompt: `  place each of the following items only once against a white background. limit the number of items to the length of the list of ingredients: ${ingredients}.  Omit any numbers, letters or words in the finished image.`,
+    prompt: `  Create a photo realistic image of the following ingredients against a black background: ${ingredients}. @pace the individual ingredients out evenly across the image. Omit any numbers, letters, words or repetition of ingredients in the finished image.`,
     n: 1,
     size: "1024x1024"
   };
@@ -84,16 +80,27 @@ async function fetchIngredientsList() {
   });
   console.log(payload);
   let data = await result.json();
+  secondArrow.style.visibility = "visible";
   console.log(payload);
   ingredientsImgHTML.src = data.data[0].url;
+  ingredientsImgHTML.classList.add("borderImage");
+  recipeHTML.innerHTML = ingredients;
   console.log(data); 
 };
 
 async function fetchListImage() {
-  fetchRecipeImage();
+  saveUserData();
+  let userNameHandle = document.getElementById("userNameHTML")
+  let userEmailHandle = document.getElementById("userEmailHTML")
+  let userNameJs = localStorage.getItem("userName");
+  let userEmailJs = localStorage.getItem("userEmail");
+  userNameHandle.innerHTML = userNameJs;
+  userEmailHandle.innerHTML = userEmailJs;
+/*   fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
+   */
 }
 
 
