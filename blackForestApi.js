@@ -1,11 +1,13 @@
 console.log("hello from api.js");
 
 
-let recipeChoice = document.getElementById("chosenRecipe");
 let hfUserTokenJs = localStorage.getItem("hfToken");
+let recipeChoice = document.getElementById("chosenRecipe");
 let recipeHTML = document.getElementById("recipeIngredients");
-let aiHTML = document.getElementById("imageAI");
-let ingredientsAI = document.getElementById("ingredientsImage");
+let ingredientsImgHTML = document.getElementById("ingredientsAI");
+let recipeImgHTML = document.getElementById("recipeAI");
+let firstArrow = document.getElementById("firstArrowHTML");
+let secondArrow = document.getElementById("secondArrowHTML");
 
 
 async function fetchRecipeImage() {
@@ -23,10 +25,12 @@ async function fetchRecipeImage() {
   });
   console.log(result);
   let blob = await result.blob();
+  firstArrow.style.visibility = "visible";
   console.log(blob);
   let imgUrl = URL.createObjectURL(blob);
   console.log(imgUrl);
-  aiHTML.src = imgUrl;
+  recipeImgHTML.src = imgUrl;
+  recipeImgHTML.classList.add("borderImage");
 };
 
 
@@ -51,7 +55,6 @@ async function fetchIngredientsList() {
   let data = await result.json();
   console.log(data);
   let ingredients = data.choices[0].message.content;
-  recipeHTML.innerHTML = ingredients;
   return ingredients;
 };
 
@@ -70,19 +73,28 @@ async function fetchIngredientsImage(ingredients) {
   });
   console.log(result);
   let blob = await result.blob();
+  secondArrow.style.visibility = "visible";
   console.log(blob);
   let imgUrl = URL.createObjectURL(blob);
   console.log(imgUrl);
-  ingredientsAI.src = imgUrl;
+  ingredientsImgHTML.classList.add("borderImage");
+  recipeHTML.innerHTML = ingredients;
 };
 
 
 async function fetchListImage() {
   saveUserData();
+  let userNameHandle = document.getElementById("userNameHTML")
+  let userEmailHandle = document.getElementById("userEmailHTML")
+  let userNameJs = localStorage.getItem("userName");
+  let userEmailJs = localStorage.getItem("userEmail");
+  userNameHandle.innerHTML = userNameJs;
+  userEmailHandle.innerHTML = userEmailJs;
   fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
+  
 };
 
 

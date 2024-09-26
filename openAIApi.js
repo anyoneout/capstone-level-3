@@ -1,5 +1,5 @@
 
-let oaiJsUserToken = localStorage.getItem("oaiToken");
+let oaiJsUserToken = localStorage.getItem("hfTokenInput");
 let recipeChoice = document.getElementById("chosenRecipe");
 let recipeHTML = document.getElementById("recipeIngredients");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
@@ -57,7 +57,6 @@ async function fetchIngredientsList() {
   });
   let data = await result.json();
   let ingredients = data.choices[0].message.content;
-  /* recipeHTML.innerHTML = ingredients; */
   return ingredients;
 };
 
@@ -96,11 +95,11 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
-/*   fetchRecipeImage();
+  fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
-   */
+  
 }
 
 
