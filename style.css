@@ -1,15 +1,15 @@
-body {
+/* body {
 
   border: solid, 1px, black;
 }
-
+ */
 .col {
   border: solid, 1px, black;
 }
-/* 
- div {
+/* div {
   border: solid, 1px, black;
 }  */
+
 
 .borderImage {
   border: solid, 3px, black;

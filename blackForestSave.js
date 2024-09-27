@@ -1,13 +1,14 @@
-let userName = document.getElementById("nameInput");
-let userEmail = document.getElementById("emailInput");
+let inputName = document.getElementById("nameInput");
+let inputEmail = document.getElementById("emailInput");
 let hfUserToken = document.getElementById("hfTokenInput");
 
 function saveUserData(){
-  let nameInput = userName.value;
-  let emailInput = userEmail.value;
+  let handleName = inputName.value;
+  let handleEmail = inputEmail.value;
   let hfToken = hfUserToken.value;
-  localStorage.setItem("userName", nameInput);
-  localStorage.setItem("userEmail", emailInput);
+  localStorage.setItem("userName", handleName);
+  localStorage.setItem("userEmail", handleEmail);
   localStorage.setItem("hfToken", hfToken);
+
 }
 

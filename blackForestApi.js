@@ -1,14 +1,14 @@
-console.log("hello from api.js");
-
 
 let hfUserTokenJs = localStorage.getItem("hfToken");
 let recipeChoice = document.getElementById("chosenRecipe");
-let recipeHTML = document.getElementById("recipeIngredients");
+let recipeIngredientsHTML = document.getElementById("recipeIngredients");
+let recipeNameHTML = document.getElementById("recipeName");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
 let recipeImgHTML = document.getElementById("recipeAI");
-let firstArrow = document.getElementById("firstArrowHTML");
 let secondArrow = document.getElementById("secondArrowHTML");
-
+let blackForestImageHTML = document.getElementById("blackForestImage");
+let spinnerOneHTML = document.getElementById("spinnerOne");
+let spinnerTwoHTML = document.getElementById("spinnerTwo");
 
 async function fetchRecipeImage() {
   let userRecipe = recipeChoice.value;
@@ -25,12 +25,15 @@ async function fetchRecipeImage() {
   });
   console.log(result);
   let blob = await result.blob();
-  firstArrow.style.visibility = "visible";
   console.log(blob);
   let imgUrl = URL.createObjectURL(blob);
   console.log(imgUrl);
+  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.src = imgUrl;
   recipeImgHTML.classList.add("borderImage");
+  secondArrow.style.visibility = "visible";
+  spinnerOneHTML.style.visibility = "hidden";
+  spinnerTwoHTML.style.visibility = "visible";
 };
 
 
@@ -71,14 +74,12 @@ async function fetchIngredientsImage(ingredients) {
       "Content-Type": "application/json"
     }  
   });
-  console.log(result);
   let blob = await result.blob();
-  secondArrow.style.visibility = "visible";
-  console.log(blob);
+  spinnerTwoHTML.style.visibility = "hidden";
   let imgUrl = URL.createObjectURL(blob);
-  console.log(imgUrl);
+  ingredientsImgHTML.src = imgUrl;
   ingredientsImgHTML.classList.add("borderImage");
-  recipeHTML.innerHTML = ingredients;
+  recipeIngredientsHTML.innerHTML = ingredients;
 };
 
 
@@ -90,11 +91,13 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
+  blackForestImageHTML.style.visibility = "visible";
+  spinnerOneHTML.style.visibility = "visible";
+ 
   fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
-  
 };
 
 

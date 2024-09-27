@@ -1,11 +1,15 @@
 
 let oaiJsUserToken = localStorage.getItem("oaiToken");
 let recipeChoice = document.getElementById("chosenRecipe");
-let recipeHTML = document.getElementById("recipeIngredients");
+let recipeIngredientsHTML = document.getElementById("recipeIngredients");
+let recipeNameHTML = document.getElementById("recipeName");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
 let recipeImgHTML = document.getElementById("recipeAI");
 let firstArrow = document.getElementById("firstArrowHTML");
 let secondArrow = document.getElementById("secondArrowHTML");
+let dallEImageHTML = document.getElementById("dallEImage");
+let spinnerOneHTML = document.getElementById("spinnerOne");
+let spinnerTwoHTML = document.getElementById("spinnerTwo");
 
 async function fetchRecipeImage() {
   let userRecipe = recipeChoice.value;
@@ -26,11 +30,13 @@ async function fetchRecipeImage() {
   });
   console.log(payload);
   let data = await result.json();
-  firstArrow.style.visibility = "visible";
   console.log(payload);
+  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.src = data.data[0].url;
   recipeImgHTML.classList.add("borderImage");
-  console.log(data); 
+  secondArrow.style.visibility = "visible";
+  spinnerOneHTML.style.visibility = "hidden";
+  spinnerTwoHTML.style.visibility = "visible";
 };
 
 
@@ -77,13 +83,11 @@ async function fetchIngredientsList() {
       "Content-Type": "application/json"
     }  
   });
-  console.log(payload);
   let data = await result.json();
-  secondArrow.style.visibility = "visible";
-  console.log(payload);
+  spinnerTwoHTML.style.visibility = "hidden";
   ingredientsImgHTML.src = data.data[0].url;
   ingredientsImgHTML.classList.add("borderImage");
-  recipeHTML.innerHTML = ingredients;
+  recipeIngredientsHTML.innerHTML = ingredients;
   console.log(data); 
 };
 
@@ -95,12 +99,15 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
+  dallEImageHTML.style.visibility = "visible";
+  spinnerOneHTML.style.visibility = "visible";
+  
+  /* firstArrow.style.visibility = "visible"; */
   fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
-  
-}
+};
 
 
 fetchButton.addEventListener("click", fetchListImage);
