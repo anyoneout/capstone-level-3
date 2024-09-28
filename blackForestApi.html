@@ -11,46 +11,49 @@
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body data-bs-theme="dark">
-  <div class="row" style="height: 40px"></div>
-  <div class="row" style="height: 62px;">
-    <div class="col-1"></div>
-    <div class="col-8 display-5">
-      <div class="ms-5 ps-5">Recipe Deconstructor</div>
+  <section>
+    <div class="container" style="min-height: 15vh;">
+      <div class="row mt-5"></div>
+      <div class="row mt-5 mb-5">
+        <div class="col-7">
+          <div class="display-5">Recipe Deconstructor</div>
+        </div>
+        <div
+          class="col-3 justify-content-end d-flex align-items-end">
+          <div id="userNameHTML"></div>
+        </div>
+        <div class="col-2 d-flex align-items-end justify-content-end">
+          <div id="userEmailHTML" class="text-info"></div>
+        </div>
+      </div>
     </div>
-    <div class="col-1 d-flex justify-content-end align-items-center">
-      <div id="userNameHTML" style="justify-content: end;"></div>
-    </div>
-    <div class="col-2 d-flex align-items-center">
-      <div id="userEmailHTML" class="text-info"></div>
-    </div>
-  </div>
-  <div class="d-flex align-items-center w-100" style="min-height: 85vh;">
-    <div class="container">
-      <form>
-        <div class="row" style="min-height: 45vh;">
-          <div class="col-2">
+    <div class="container" style="min-height: 45vh;">
+      <div class="row mt-3">
+        <div class="col-2">
+          <form>
             <div class="input-group">
               <label for="nameInput" class="form-label">Full Name:
-                <input type="text" id="nameInput" class="form-control" placeholder="John Doe" style="width: 200px">
+                <input type="text" id="nameInput" class="form-control" placeholder="John Doe">
               </label>
             </div>
             <div class="input-group">
               <label for="emailInput" class="form-label">Email:
-                <input type="email" id="emailInput" class="form-control" placeholder="name@domain.com" style="width: 200px">
+                <input type="email" id="emailInput" class="form-control" placeholder="name@domain.com">
               </label>
             </div>
             <div class="input-group">
               <label for="hfTokenInput">Huggingface Token:
-                <input class="form-control" type="text" id="hfTokenInput" style="width: 200px">
+                <input class="form-control" type="text" id="hfTokenInput">
               </label>
             </div>
-            <br><br>
-            <div class="dropdown" data-bs-theme="dark" style="width: 200px">
+            <br><br><br>
+            <div class="dropdown" data-bs-theme="dark">
               <label for="chosenRecipe">Recipes:</label>
               <select class="form-select mb-2" name="chosenRecipe" id="chosenRecipe">
                 <option value="Caprese Salad">Caprese Salad</option>
@@ -70,48 +73,46 @@
                 <option value="Ice Cream Sundae">Ice Cream Sundae</option>
                 <option value="Pizza Margherita">Pizza Margherita</option>
               </select>
-              <button type="button" id="fetchButton" class="btn btn-info mt-2">Generate Recipe</button>
+              <button type="button" id="fetchButton" class="btn btn-info mt-2">Generate</button>
             </div>
-          </div>
-          <div class="col-1 d-flex align-items-center justify-content-center">
-            <i class="bi bi-arrow-right" id="firstArrowHTML" style="font-size: 3rem; color: #f1ffb0; visibility: hidden;"></i>
-          </div>
-          <div class="col-4 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-info" role="status" style="visibility: hidden;" id="spinnerOne">
-              <span class="visually-hidden"></span>
-            </div>
-            <img id="recipeAI" class="rounded-circle" style="max-width: 100%;">
-          </div>
-          <div class="col-1 d-flex align-items-center justify-content-center">
-            <i class="bi bi-arrow-right" id="secondArrowHTML" style="font-size: 3rem; color: #f1ffb0; visibility: hidden;"></i>
-          </div>
-          <div class="col-4 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-info" role="status" style="visibility: hidden;" id="spinnerTwo">
-              <span class="visually-hidden"></span>
-            </div>
-            <img id="ingredientsAI"  style="max-width: 100%;">
-          </div>
+          </form>
         </div>
-      </form>
-      <div class="row" style="height: 50px;"></div>
-      <div class="row">
-        <div class="col-3 d-flex justify-content-start align-items-center">
-          <div>
-            <img src="img/blackForestLogoAlt.png" id="blackForestImage" style="width: 160px; visibility: hidden;" alt="">
+        <div class="col-1">
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-center">
+          <div class="spinner-border text-info" role="status" style="visibility: hidden;" id="spinnerOne">
+            <span class="visually-hidden"></span>
           </div>
+          <img id="recipeAI" class="rounded-circle" style="max-width: 100%;">
         </div>
-        <div class="col-4 d-flex align-items-center justify-content-center" style="height: 180px;">
-          <div id="recipeName" class="display-6" style="color: #f1ffb0;"></div>
+        <div class="col-1 d-flex align-items-center justify-content-center">
+          <i class="bi bi-arrow-right" id="secondArrowHTML" style="font-size: 3rem; color: #f1ffb0; visibility: hidden;"></i>
         </div>
-        <div class="col-1"></div>
-        <div class="col-4 d-flex align-items-center justify-content-center" style="height: 180px;">
-          <div id="recipeIngredients" class="h-5" style="width: 90%; color: #f1ffb0;"></div>
+        <div class="col-4 d-flex align-items-center justify-content-center">
+          <div class="spinner-border text-info" role="status" style="visibility: hidden;" id="spinnerTwo">
+            <span class="visually-hidden"></span>
+          </div>
+          <img id="ingredientsAI" style="max-width: 100%;">
         </div>
       </div>
     </div>
-  </div>
+    <div class="container" style="min-height: 25vh;">
+      <div class="row" style="min-height: 5vh;"></div>
+      <div class="row" style="min-height: 20vh;">
+        <div class="col-3 align-items-center d-flex">
+          <img src="img/blackForestLogoAlt.png" id="blackForestImage" class="ps-2" style="width: 160px; visibility: hidden;" alt="">
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-center">
+          <p id="recipeName" class="display-6" style="color: #f1ffb0;"></p>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4 d-flex align-items-center justify-content-start">
+          <div id="recipeIngredients" class="ms-5" style="color: #f1ffb0; width: 75%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
   <script src="blackForestSave.js"></script>
   <script src="blackForestApi.js"></script>
 </body>
-
 </html>

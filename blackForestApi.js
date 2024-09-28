@@ -13,9 +13,10 @@ let spinnerTwoHTML = document.getElementById("spinnerTwo");
 async function fetchRecipeImage() {
   let userRecipe = recipeChoice.value;
   let url = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev";
+  spinnerOneHTML.style.visibility = "visible";
   let payload = 
     {inputs: ` create a photo realistic image of the following dish against a black background: ${userRecipe}.  Omit any numbers, letters or words in the finished image.`};
-  let result = await fetch(url, {
+    let result = await fetch(url, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -33,7 +34,7 @@ async function fetchRecipeImage() {
   recipeImgHTML.classList.add("borderImage");
   secondArrow.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "hidden";
-  spinnerTwoHTML.style.visibility = "visible";
+  
 };
 
 
@@ -64,6 +65,7 @@ async function fetchIngredientsList() {
 
 async function fetchIngredientsImage(ingredients) {
   let url = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev";
+  spinnerTwoHTML.style.visibility = "visible";
   let payload = 
     {inputs: `place each of the following items: ${ingredients} in order against a black background. space the individual ingredients out evenly across the image horizontally from left to right. do not add any numbers, letters, words in the finished image.`};
   let result = await fetch(url, {
@@ -92,9 +94,9 @@ async function fetchListImage() {
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
   blackForestImageHTML.style.visibility = "visible";
-  spinnerOneHTML.style.visibility = "visible";
+  
  
-  fetchRecipeImage();
+  await fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
