@@ -94,8 +94,6 @@ async function fetchListImage() {
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
   blackForestImageHTML.style.visibility = "visible";
-  
- 
   await fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);

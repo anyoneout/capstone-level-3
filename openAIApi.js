@@ -100,7 +100,6 @@ async function fetchListImage() {
   userEmailHandle.innerHTML = userEmailJs;
   dallEImageHTML.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "visible";
-  
   await fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
