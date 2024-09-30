@@ -70,7 +70,7 @@ async function fetchIngredientsList() {
   let url = "https://api.openai.com/v1/images/generations";
   let payload = {
     model: "dall-e-3",
-    prompt: `  Create a photo realistic image of the following ingredients against a black background: ${ingredients}. @pace the individual ingredients out evenly across the image. Omit any numbers, letters, words or repetition of ingredients in the finished image.`,
+    prompt: `  Create a photo realistic image of the following ingredients against a black background: ${ingredients}. Space the individual ingredients out evenly across the image using each ingredient only once. Omit any numbers, letters, words in the finished image.`,
     n: 1,
     size: "1024x1024"
   };
