@@ -3,12 +3,17 @@
 }
 
 .col {
-  border: solid, 1px, black;
+  border: solid, 1px, rgb(255, 255, 255);
 }
 div {
-  border: solid, 1px, rgb(0, 0, 0);
+  border: solid, 1px, rgb(255, 255, 255);
 }
- */
+
+
+
+.row {
+  border: solid, 1px, white; 
+} */
 
 .borderImage {
   border: solid, 3px, black;
