@@ -6,7 +6,6 @@ let recipeNameHTML = document.getElementById("recipeName");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
 let recipeImgHTML = document.getElementById("recipeAI");
 let secondArrow = document.getElementById("secondArrowHTML");
-let dallEImageHTML = document.getElementById("dallEImage");
 let spinnerOneHTML = document.getElementById("spinnerOne");
 let spinnerTwoHTML = document.getElementById("spinnerTwo");
 
@@ -30,8 +29,8 @@ async function fetchRecipeImage() {
   console.log(payload);
   let data = await result.json();
   console.log(payload);
-  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.src = data.data[0].url;
+  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.classList.add("borderImage");
   secondArrow.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "hidden";
@@ -98,7 +97,6 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
-  dallEImageHTML.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "visible";
   await fetchRecipeImage();
   let ingredients = await fetchIngredientsList();

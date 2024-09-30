@@ -6,7 +6,7 @@ let recipeNameHTML = document.getElementById("recipeName");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
 let recipeImgHTML = document.getElementById("recipeAI");
 let secondArrow = document.getElementById("secondArrowHTML");
-let blackForestImageHTML = document.getElementById("blackForestImage");
+
 let spinnerOneHTML = document.getElementById("spinnerOne");
 let spinnerTwoHTML = document.getElementById("spinnerTwo");
 
@@ -29,8 +29,8 @@ async function fetchRecipeImage() {
   console.log(blob);
   let imgUrl = URL.createObjectURL(blob);
   console.log(imgUrl);
-  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.src = imgUrl;
+  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.classList.add("borderImage");
   secondArrow.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "hidden";
@@ -93,7 +93,6 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
-  blackForestImageHTML.style.visibility = "visible";
   await fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
