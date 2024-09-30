@@ -1,16 +1,20 @@
-/* body {
+/* * {
+  border: solid, 1px, rgb(255, 255, 255);
+}
 
-  border: solid, 1px, black;
+.col {
+  border: solid, 1px, rgb(255, 255, 255);
+}
+div {
+  border: solid, 1px, rgb(255, 255, 255);
+}
+
+
+
+.row {
+  border: solid, 1px, white; 
 }
  */
-.col {
-  border: solid, 1px, black;
-}
-/* div {
-  border: solid, 1px, black;
-} */ 
-
-
 .borderImage {
   border: solid, 3px, black;
 }

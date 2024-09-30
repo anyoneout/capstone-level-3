@@ -6,7 +6,6 @@ let recipeNameHTML = document.getElementById("recipeName");
 let ingredientsImgHTML = document.getElementById("ingredientsAI");
 let recipeImgHTML = document.getElementById("recipeAI");
 let secondArrow = document.getElementById("secondArrowHTML");
-let dallEImageHTML = document.getElementById("dallEImage");
 let spinnerOneHTML = document.getElementById("spinnerOne");
 let spinnerTwoHTML = document.getElementById("spinnerTwo");
 
@@ -30,8 +29,8 @@ async function fetchRecipeImage() {
   console.log(payload);
   let data = await result.json();
   console.log(payload);
-  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.src = data.data[0].url;
+  recipeNameHTML.innerHTML = userRecipe;
   recipeImgHTML.classList.add("borderImage");
   secondArrow.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "hidden";
@@ -70,7 +69,7 @@ async function fetchIngredientsList() {
   let url = "https://api.openai.com/v1/images/generations";
   let payload = {
     model: "dall-e-3",
-    prompt: `  Create a photo realistic image of the following ingredients against a black background: ${ingredients}. @pace the individual ingredients out evenly across the image. Omit any numbers, letters, words or repetition of ingredients in the finished image.`,
+    prompt: `place each of the following items: ${ingredients} in order against a black background. space the individual ingredients out evenly across the image horizontally from left to right. do not add any numbers, letters, words or images. Omit anything that look like words, letters or numbers in the finished image.`,
     n: 1,
     size: "1024x1024"
   };
@@ -98,9 +97,7 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
-  dallEImageHTML.style.visibility = "visible";
   spinnerOneHTML.style.visibility = "visible";
-  
   await fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);

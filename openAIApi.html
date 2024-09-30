@@ -16,13 +16,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body data-bs-theme="dark">
+<body data-bs-theme="dark" style="background-color: black;">
   <section>
     <div class="container" style="min-height: 15vh;">
       <div class="row mt-5"></div>
-      <div class="row mt-5 mb-5">
+      <div class="row mt-4 mb-5">
         <div class="col-7">
-          <div class="display-5">Recipe Deconstructor</div>
+          <div class="display-4 fw-bold" style="color: #fff78a">OpenAI</div>
         </div>
         <div
           class="col-3 justify-content-end d-flex align-items-end">
@@ -34,12 +34,12 @@
       </div>
     </div>
     <div class="container" style="min-height: 45vh;">
-      <div class="row mt-3">
+      <div class="row mt-5">
         <div class="col-2">
           <form>
             <div class="input-group">
               <label for="nameInput" class="form-label">Full Name:
-                <input type="text" id="nameInput" class="form-control" placeholder="John Doe">
+                <input type="text" id="nameInput" class="form-control" placeholder="John Doe" style="color: black; background-color: rgba(255, 255, 255, 0.205);">
               </label>
             </div>
             <div class="input-group">
@@ -73,7 +73,7 @@
                 <option value="Ice Cream Sundae">Ice Cream Sundae</option>
                 <option value="Pizza Margherita">Pizza Margherita</option>
               </select>
-              <button type="button" id="fetchButton" class="btn btn-info mt-2">Generate</button>
+              <button type="button" id="fetchButton" class="btn btn-sm btn-outline-info mt-2">Generate</button>
             </div>
           </form>
         </div>
@@ -99,22 +99,43 @@
     <div class="container" style="min-height: 25vh;">
       <div class="row" style="min-height: 5vh;"></div>
       <div class="row" style="min-height: 20vh;">
-        <div class="col-3 align-items-center d-flex">
-          <img src="img/dallE3Logo.png" id="dallEImage" style="width: 250px; visibility: hidden;" alt="">
+        <div class="col-3 align-items-start d-flex">
+          <img src="img/dallE3Logo.png" id="dallEImage" style="width: 250px;" alt="">
         </div>
-        <div class="col-4 d-flex align-items-center justify-content-center">
+        <div class="col-4 d-flex align-items-start justify-content-center">
           <p id="recipeName" class="display-6" style="color: #f1ffb0;"></p>
         </div>
         <div class="col-1"></div>
-        <div class="col-4 d-flex align-items-center justify-content-start">
+        <div class="col-4 d-flex align-items-start justify-content-start">
           <div id="recipeIngredients" class="ms-5" style="color: #f1ffb0; width: 75%;"></div>
         </div>
       </div>
     </div>
   </section>
-
   <script src="openAISave.js"></script>
   <script src="openAIApi.js"></script>
+  <footer>
+    <div style="height: 5px;"></div>
+    <div class="row w-100 d-flex justify-content-center mt-3" style="color:#fff78af5">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <div class="row align-items-end d-flex">
+          <div class="col-3 d-flex justify-content-end align-items-end">
+            <a href="index.html" style="font-size: 13px;" class="link-underline-opacity-0 link-underline text-info">Home</a> 
+          </div>
+          <div class="col-3 d-flex justify-content-center align-items-end">
+            <a href="blackForestApi.html" style="font-size: 13px;" class="link-underline-opacity-0 link-underline text-info">Black Forest FLUX</a> 
+          </div>
+          <div class="col-3 d-flex justify-content-center align-items-end">
+            <a href="openAIApi.html" style="font-size: 13px; color: #00ffff42" class="link-underline-opacity-0 link-underline">OpenAI Dall-E-3</a>
+          </div>
+          <div class="col-3 d-flex justify-content-start align-items-end">
+            <a href="about.html" style="font-size: 13px;" class="link-underline-opacity-0 link-underline text-info">About</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </footer>
 </body>
-
 </html>
