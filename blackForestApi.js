@@ -44,7 +44,7 @@ async function fetchIngredientsList() {
   let payload = {
     model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
     messages: [{role: "user", content: `List only the individual ingredients in ${userRecipe} by order of importance to the recipe. omit any optional ingredients and description of the ingredients. `}],
-    max_tokens: 50,
+    max_tokens: 500,
     stream: false
   };
   console.log(payload);
@@ -93,7 +93,7 @@ async function fetchListImage() {
   let userEmailJs = localStorage.getItem("userEmail");
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
-  await fetchRecipeImage();
+  fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
