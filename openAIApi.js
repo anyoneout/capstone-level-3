@@ -98,7 +98,7 @@ async function fetchListImage() {
   userNameHandle.innerHTML = userNameJs;
   userEmailHandle.innerHTML = userEmailJs;
   spinnerOneHTML.style.visibility = "visible";
-  await fetchRecipeImage();
+  fetchRecipeImage();
   let ingredients = await fetchIngredientsList();
   console.log(ingredients);
   fetchIngredientsImage(ingredients);
